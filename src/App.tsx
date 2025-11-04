@@ -1,10 +1,13 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useState } from "react";
+import { flushSync } from "react-dom";
+import "remixicon/fonts/remixicon.css";
 
 const App = () => {
   const [showContent, setShowContent] = useState(false);
 
+  // svg animation
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.to(".vi-mask-group", {
@@ -21,8 +24,8 @@ const App = () => {
       opacity: 0,
       onUpdate: function () {
         if (this.progress() >= 0.9) {
+          flushSync(() => setShowContent(true));
           document.querySelector(".svg")?.remove();
-          setShowContent(true);
           this.kill();
         }
       },
@@ -59,6 +62,54 @@ const App = () => {
           />
         </svg>
       </div>
+      {showContent && (
+        <div className="main w-full">
+          <div className="landing w-full h-screen bg-black">
+            <div className="navbar absolute top-0 left-0 z-10 w-full py-10 px-10">
+              <div className="logo flex gap-7">
+                <div className="lines flex flex-col gap-[5px]">
+                  <div className="line w-15 h-2 bg-white"></div>
+                  <div className="line w-8 h-2 bg-white"></div>
+                  <div className="line w-5 h-2 bg-white"></div>
+                </div>
+                <h3 className="text-4xl -mt-2 leading-none text-white">
+                  Rockstar
+                </h3>
+              </div>
+            </div>
+            <div className="images-div relative w-full h-screen overflow-hidden">
+              <img
+                src="./sky.png"
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                alt=""
+              />
+              <img
+                src="./bg.png"
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                alt=""
+              />
+              <img
+                src="./girlbg.png"
+                className="absolute  bottom-[-45%] left-1/2 -translate-x-1/2"
+                alt=""
+              />
+            </div>
+            <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-linear-to-t from-black to-transparent">
+              <div className="flex items-center gap-4">
+                <i className="text-4xl ri-arrow-down-line"></i>
+                <h3 className="text-xl font-[Helvetica_Now_Display]">
+                  Scroll Down
+                </h3>
+              </div>
+              <img
+                className="absolute h-[55px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                src="./ps5.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
