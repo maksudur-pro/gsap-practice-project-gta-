@@ -88,6 +88,11 @@ const App = () => {
                 className="absolute top-0 left-0 w-full h-full object-cover"
                 alt=""
               />
+              <div className="text text-white flex flex-col gap-3 absolute top-10 left-1/2 -translate-x-1/2">
+                <h1 className="text-[10rem] leading-none -ml-40">grand</h1>
+                <h1 className="text-[10rem] leading-none  ml-20">theft</h1>
+                <h1 className="text-[10rem] leading-none -ml-40">auto</h1>
+              </div>
               <img
                 src="./girlbg.png"
                 className="absolute  bottom-[-45%] left-1/2 -translate-x-1/2"
